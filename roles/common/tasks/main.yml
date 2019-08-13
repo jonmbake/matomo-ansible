@@ -1,0 +1,8 @@
+---
+- include: install-lamp.yml
+- include: install-utils.yml
+- include: upgrade-packages.yml
+- include: configure-firewall.yml
+- include: initialize-database.yml
+- include: install-matomo.yml
+- include: configure-apache.yml

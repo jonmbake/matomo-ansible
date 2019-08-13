@@ -1,0 +1,6 @@
+- name: Install utils
+  apt:
+    pkg:
+      - libarchive-tools
+    force_apt_get: true
+    update_cache: yes

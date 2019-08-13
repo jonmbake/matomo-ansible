@@ -1,0 +1,15 @@
+- hosts: local
+  connection: local
+  become: yes
+  become_user: root
+  vars_files:
+    - group_vars/all
+    - host_vars/local
+  pre_tasks:
+    - raw: apt -y update && apt install -y python3-apt python3-mysqldb
+  roles:
+    - common
+  tasks:
+    - name: Enable default Apache SSL site
+      command: a2ensite default-ssl
+      notify: Restart Apache

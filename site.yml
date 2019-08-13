@@ -1,0 +1,26 @@
+- hosts: prod
+  become: yes
+  become_user: root
+  vars_files:
+    - group_vars/all
+    - host_vars/site
+  pre_tasks:
+    - raw: apt -y update && apt install -y python3-apt python3-mysqldb
+  gather_facts: no
+  roles:
+    - common
+  tasks:
+    - name: Add certbot repo
+      apt_repository:
+        repo: ppa:certbot/certbot
+        state: present
+
+    - name: Install Certbot
+      apt:
+        pkg:
+          - certbot
+          - python-certbot-apache
+        force_apt_get: true
+
+    - name: Invoke Certbot
+      command: certbot --apache -n --agree-tos -m {{ certificate_contact_email }} -d {{ certificate_domain }}

@@ -1,0 +1,26 @@
+- name: Remove deault Apache page
+  file:
+    state: absent
+    path: /var/www/html/index.html
+
+- name: Enable Apache SSL module
+  apache2_module:
+    state: present
+    name: ssl
+  notify: Restart Apache
+
+- name: Set proper Apache owner/group
+  file:
+    path: /var/www/html
+    state: directory
+    recurse: yes
+    owner: www-data
+    group: www-data
+  notify: Restart Apache
+
+- name: Configure php.ini
+  lineinfile:
+    path: /etc/php/7.2/apache2/php.ini
+    regexp: '^;always_populate_raw_post_data = -1'
+    line: 'always_populate_raw_post_data = -1'
+  when: matomo_install.stat.exists == false

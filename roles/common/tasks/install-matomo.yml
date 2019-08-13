@@ -1,0 +1,40 @@
+- name: Matomo | Check if installed
+  stat:
+    path: /var/www/html/matomo
+  register: matomo_install
+
+- name: Matomo | Download
+  get_url:
+    url: https://builds.matomo.org/matomo.zip
+    dest: /tmp
+  when: matomo_install.stat.exists == false
+
+- name: Matomo | Extract zip
+  command: bsdtar --strip-components=1 -xvf /tmp/matomo.zip -C /var/www/html/
+  when: matomo_install.stat.exists == false
+
+- name: Matomo | Set force_ssl to true
+  lineinfile:
+    path: /var/www/html/config/config.ini.php
+    line: 'force_ssl = 1'
+    insertafter: '\[General\]'
+
+- name: Matomo | Create log directory
+  file:
+    path: /var/log/matomo
+    state: directory
+    owner: 'www-data'
+    group: 'www-data'
+    mode: '0750'
+
+- name: Matomo | Automatically archive reports
+  cron:
+    name: 'archive matomo reports'
+    minute: '5'
+    user: 'www-data'
+    job: "/usr/bin/php /var/www/html/console core:archive --url=https://{{ certificate_domain }} > /var/log/matomo/archive.log"
+
+- name: Matomo | Remove download
+  file:
+    state: absent
+    path: /tmp/matomo.zip
