@@ -6,9 +6,9 @@ With support for local provisioning via Vagrant (useful to quickly test changes)
 
 Both local and non-local provisions were tested on a [Ubuntu 18.04](http://releases.ubuntu.com/18.04/) instance.
 
-## Provisioning Local
+## Provisioning Locally
 
-/* Requires [Vagrant](https://www.vagrantup.com/) to be installed.
+* Requires [Vagrant](https://www.vagrantup.com/) to be installed.
 
 Simply run:
 
@@ -20,7 +20,9 @@ Then navigate to https://localhost:8443/. Note: because it is using a self-signe
 
 ## Provisioning Production Site
 
-First make sure there is a remote _Ubuntu 18.04_ instance that you can ssh into, e.g. `ssh root@my-ubuntu-instace.com`.
+* Requires [Vagrant](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) to be installed.
+
+First make sure there is a remote _Ubuntu 18.04_ instance that you want to install Matomoo on. Also, make sure you can ssh in, e.g. by running the comman `ssh root@my-ubuntu-instace.com`.
 
 Then make sure to update the inventory `prod` entry:
 
