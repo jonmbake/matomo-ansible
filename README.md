@@ -2,7 +2,7 @@
 
 An [Ansible](https://docs.ansible.com/) playbook to provision a secure [Matomo](https://matomo.org/) instance.
 
-With support for local provisioning via Vagrant (useful to quickly test changes).
+With support for local provisioning via Vagrant (useful to quickly testing changes).
 
 Both local and non-local provisions were tested on a [Ubuntu 18.04](http://releases.ubuntu.com/18.04/) instance.
 
@@ -18,13 +18,13 @@ vagrant up
 
 Then navigate to https://localhost:8443/. Note: because it is using a self-signed certificate, you will receive a warning when opening the page within a browser.
 
-## Provisioning Production Site
+## Provisioning a Production, i.e. Remote, Site
 
 * Requires [Vagrant](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) to be installed.
 
-First make sure there is a remote _Ubuntu 18.04_ instance that you want to install Matomoo on. Also, make sure you can ssh in, e.g. by running the comman `ssh root@my-ubuntu-instace.com`.
+First make sure there is a remote _Ubuntu 18.04_ instance that you want to install Matomoo on. Also, make sure you can ssh in, e.g. by running the command `ssh root@my-ubuntu-instace.com`.
 
-Then make sure to update the inventory `prod` entry:
+Then make sure to update the inventory's `prod` entry:
 
 ```
 [prod]
@@ -45,7 +45,7 @@ db_username: matomo
 db_password: 'Jana705&loge'
 ```
 
-This can be overridden by passing in _extra vars_ like in the above command.
+These can be overridden by passing in _extra vars_ like in the above command.
 
 
 ## Other Configuration Notes
@@ -60,4 +60,4 @@ Make sure to off the _Archive reports when viewed from the browser_ settings opt
 - UFW Firewall enabled with 443 (SSL) port and rate-limited 22 (SSH) port exposed.
 - Uses [Apache](https://httpd.apache.org/) HTTP Server.
 - Automatic security upgrades are enabled via [unattended-upgrade](https://help.ubuntu.com/lts/serverguide/automatic-updates.html).
-- SSL/HTTPS enable out of the box using [LetsEncrypt/Certbot](https://certbot.eff.org/). SSL is enforced.
+- SSL/HTTPS enable out of the box using [LetsEncrypt/Certbot](https://certbot.eff.org/). SSL is enforced always.
