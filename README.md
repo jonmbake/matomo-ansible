@@ -50,8 +50,10 @@ This can be overridden by passing in _extra vars_ like in the above command.
 
 Make sure to off the _Archive reports when viewed from the browser_ settings option. The provision creates a cron job to automatically archive reports.
 
+![Archive reports when viewed from the browser off](https://github.com/jonmbake/screenshots/raw/master/matomo-ansible/matomo-archive-reports-off.png)
 
-## Security Details
+
+## Security Features
 
 - UFW Firewall enabled with 443 (SSL) port and rate-limited 22 (SSH) port exposed.
 - Uses [Apache](https://httpd.apache.org/) HTTP Server.
