@@ -20,22 +20,23 @@ Then navigate to https://localhost:8443/. Note: because it is using a self-signe
 
 ## Provisioning a Production, i.e. Remote, Site
 
-* Requires [Vagrant](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) to be installed.
+* Requires [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) to be installed.
 
-First make sure there is a remote _Ubuntu 18.04_ instance that you want to install Matomoo on. Also, make sure you can ssh in, e.g. by running the command `ssh root@my-ubuntu-instace.com`.
+First make sure there is a remote _Ubuntu 18.04_ instance that you want to install Matomoo on. Also, make sure you can ssh in, i.e. running the command `ssh root@my-matomo-instace.com` should be successful.
 
 Then make sure to update the inventory's `prod` entry:
 
 ```
 [prod]
-my-ubuntu-instace.com ansible_user=root
+my-matomo-instace.com ansible_user=root
 ```
-### Running the playbook to provision
 
-Certbot require `certificate_contact_email` and `certificate_domain` to be set. These can be passed as [extra vars](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#id35).
+### Running the playbook to provision the instance
+
+Certbot requires `certificate_contact_email` and `certificate_domain` to be set. These can be passed as [extra vars](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#id35) when invoking the playbook:
 
 ```
-ansible-playbook -i inventory site.yml -e "certificate_contact_email=jonmbake@gmail.com" -e "certificate_domain=example.com"
+ansible-playbook -i inventory site.yml -e "certificate_contact_email=admin@my-matomo-instace.com" -e "certificate_domain=my-matomo-instace.com"
 ```
 
 ## Default Database Credentials
