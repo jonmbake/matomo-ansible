@@ -6,6 +6,8 @@ With support for local provisioning via Vagrant (useful to quickly testing chang
 
 Both local and non-local provisions were tested on a [Ubuntu 18.04](http://releases.ubuntu.com/18.04/) instance.
 
+Blog post: https://jonbake.com/blog/2019/08/17/setting-up-a-personal-matamo-instance.html
+
 ## Provisioning Locally
 
 * Requires [Vagrant](https://www.vagrantup.com/) to be installed.
